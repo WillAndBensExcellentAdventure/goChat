@@ -1,6 +1,6 @@
 {
-  "name": "trackgraphic",
-  "description": "https://trackgraphic.com",
+  "name": "goChag",
+  "description": "real time chat client",
   "version": "0.0.1",
   "private": true,
   "scripts": {
