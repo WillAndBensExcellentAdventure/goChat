@@ -1,0 +1,20 @@
+# visual studio code workspace files
+.vscode
+
+# jet brains workspace files
+.idea
+
+# npm packages
+node_modules
+
+# build files
+dist
+
+# scratch files
+scratch
+
+# env files
+.env
+
+# auto generated documentation
+docs
