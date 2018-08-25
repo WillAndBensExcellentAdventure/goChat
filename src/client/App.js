@@ -1,19 +1,34 @@
-import React, { Component } from 'react';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import './styles/App.scss';
+import React from 'react';
+import { withStyles } from '@material-ui/core/styles';
+import Login from './components/Login';
 
-const theme = createMuiTheme();
-
-class App extends Component {
-  componentDidmount = () => {
-    console.log('App mounted');
+const styles = {
+  App: {
+    position: 'relative',
+  },
+  AppHeader: {
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
   }
+};
+const App = () => {
+  return (
+    <div className="App">
+      <header className="AppHeader">
+        <h1 className="App-title"><i>Popitize</i></h1>
+      </header>
+      <Login classes={
+        {
+          card: 'signUpCard',
+          buttonContainer: 'buttonContainer',
+        }
+      }
+      />
+    </div>
+    )
+};
 
-  render = () => (
-    <MuiThemeProvider theme={theme}>
-      <p>it works!!</p>
-    </MuiThemeProvider>
-  )
-}
-
-export default App;
+const AppStyled = withStyles(styles)(App);
+export default AppStyled;
+// export default App;

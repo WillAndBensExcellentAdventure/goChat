@@ -6,6 +6,7 @@
     "node": true
   },
   "rules": {
+    "indent":0,
     "camelcase": 1,
     "no-console": "off",
     "comma-dangle": "off",
@@ -14,9 +15,9 @@
     "no-underscore-dangle": 0,
     "class-methods-use-this": 0,
     "max-len": [
-      2, 
-      80, 
-      2, 
+      2,
+      80,
+      2,
       {
       "ignoreUrls": true,
       "ignoreComments": true,
