@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { deepPurple, purple } from '@material-ui/core/colors';
 import LoginPage from './components/containers/LoginPage';
+import DashboardPage from './components/containers/DashboardPage';
 
 // example theme, please change
 // you can use hex colors too
@@ -16,17 +17,17 @@ const theme = createMuiTheme({
 
 const styles = {
   app: {
-    height: '100vh',
-    width: '100vw',
-    overflow: 'hidden'
   },
+
 };
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      index: 0
+      username: '',
+      password: '',
+      index: 1
     };
   }
 
@@ -35,6 +36,7 @@ class App extends Component {
       throw new Error(`Index ${index} of range`);
     }
     this.setState({ index });
+    console.log('changed index to');
   }
 
   render = () => {
@@ -47,7 +49,7 @@ class App extends Component {
             index === 0 ?
               <LoginPage handleChangeIndex={this.handleChangeIndex} />
             :
-              <p>chat dashboard</p>
+              <DashboardPage />
           }
         </div>
       </MuiThemeProvider>

@@ -1,7 +1,6 @@
-
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { AppBar, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import Login from '../presentational/Login';
 
@@ -10,11 +9,13 @@ const styles = {
     display: 'inline-block',
     height: '100vh',
     width: '100vw',
-    overflow: 'auto'
+    overflow: 'hidden'
   },
   title: {
     color: 'white',
-    padding: '.5rem'
+    padding: '.5rem',
+    // position: 'absolute',
+    maxWidth: '100%'
   }
 };
 
@@ -27,34 +28,40 @@ class LoginPage extends Component {
       password: ''
     };
   }
-
+  handleChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  }
+  submitUserInfo = (e) => {
+    e.preventDefault();
+    console.log(this.state);
+    this.props.handleChangeIndex(1);
+  }
   render = () => {
     // classes provides the generated classnames on an object
     const { classes } = this.props;
-    console.log('secrets for dev ', this.state);
+    // console.log('secrets for dev ', this.state);
     return (
       <div className={classes.page}>
-        <AppBar
-          position="static"
-          color="primary"
+
+        <Typography
+          variant="headline"
+          className={classes.title}
+          align="center"
         >
-          <Typography
-            variant="headline"
-            className={classes.title}
-            align="center"
-          >
             TITLE HERE
-          </Typography>
-        </AppBar>
-        <Login />
+        </Typography>
+
+        <Login submitUserInfo={this.submitUserInfo} handleChange={this.handleChange} />
       </div>
     );
   }
 }
 
 LoginPage.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  handleChangeIndex: PropTypes.number.isRequired
 };
 
 export default withStyles(styles)(LoginPage);
-// export default App;
