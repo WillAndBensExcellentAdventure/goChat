@@ -20,7 +20,7 @@ const styles = {
   },
   messageForm: {
     bottom: 0,
-    width: '100%',
+    width: 'calc(100% - 240px)',
     position: 'absolute',
     padding: '3%',
     backgroundColor: 'rgba(0, 0, 0, 0.3)',
@@ -53,7 +53,7 @@ const Input = (props) => {
       </Button>
     </form>
   );
-}
+};
 
 Input.propTypes = {
   classes: PropTypes.object.isRequired,
