@@ -9,6 +9,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Input from '../presentational/Input';
 import Message from '../presentational/Message';
+import { socket, sendMessage } from '../../api/api';
 
 
 const drawerWidth = 240;
@@ -63,28 +64,10 @@ const styles = theme => ({
  class Dashboard extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       chatRoom: '',
       username: 'William',
-      messageHistory: [
-        {
-          messageSender: 'Ben',
-          messageTime: '12:45pm',
-          messageContent: 'Hello world'
-        },
-        {
-          messageSender: 'Will',
-          messageTime: '12:25pm',
-          messageContent: 'The world cannot hear you'
-        },
-        {
-          messageSender: 'Steve',
-          messageTime: '12:43pm',
-          messageContent: 'Where am I?'
-        },
-
-       ],
+      messageHistory: [],
       usersInRoom: [
        'Ben',
        'Will',
@@ -95,20 +78,26 @@ const styles = theme => ({
     };
   }
 
+  componentDidMount() {
+    socket.on('messageHistory', this.handleHistory);
+  }
 
   onSubmit = (e) => {
     e.preventDefault();
-
     const message = {
       messageSender: this.state.username,
       messageTime: '2', // I know this wont work by itself
       messageContent: this.state.currentMessage
-    }
+    };
 
-    this.setState(prevState => ({
-      messageHistory: [...prevState.messageHistory, message],
-      currentMessage: ''
-    }));
+    sendMessage(message);
+    this.setState({
+     currentMessage: ''
+    });
+  }
+
+  handleHistory = (messageHistory) => {
+    this.setState({ messageHistory });
   }
 
   handleChange = (e) => {
