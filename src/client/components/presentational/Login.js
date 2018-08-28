@@ -106,7 +106,7 @@ const Login = (props) => {
       </CardActions>
     </Card>
   );
-}
+};
 
 Login.propTypes = {
   classes: PropTypes.object.isRequired,

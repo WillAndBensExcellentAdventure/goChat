@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import TextField from '@material-ui/core/TextField';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Input from '../presentational/Input';
+import Message from '../presentational/Message';
+
 
 const drawerWidth = 240;
 
@@ -64,8 +63,15 @@ const styles = theme => ({
     super(props);
 
     this.state = {
+      chatRoom: '',
+      user: {
+        username: '',
+        password: ''
+      },
+      messages: [],
+      usersInRoom: {
 
-
+      }
     };
   }
 
@@ -80,6 +86,16 @@ const styles = theme => ({
   render = () => {
     const { classes } = this.props;
 
+    const messages = (
+      /*Message history from api*/.map((message) => {
+      <Message
+        messageSender={message.sender}
+        messageTime={message.time}
+        messageContent={message.content}
+      />
+    });
+    )
+
 
     return (
 
@@ -93,7 +109,7 @@ const styles = theme => ({
         </AppBar>
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          <Typography noWrap>Messages go here</Typography>
+          {messages}
         </main>
         <Drawer
           variant="permanent"
@@ -142,4 +158,7 @@ const styles = theme => ({
   }
 }
 
+Dashboard.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
 export default withStyles(styles)(Dashboard);
