@@ -39,11 +39,5 @@ const Message = (props) => {
   );
 };
 
-Message.PropTypes = {
-  classes: PropTypes.object.isRequired,
-  messageContent: PropTypes.string.isRequired,
-  messageTime: PropTypes.???.isRequired,
-  messageSender: PropTypes.string.isRequired
-}
 
 export default withStyles(styles)(Message);

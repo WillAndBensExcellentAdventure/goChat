@@ -68,10 +68,17 @@ const styles = theme => ({
         username: '',
         password: ''
       },
-      messages: [],
-      usersInRoom: {
-
-      }
+      messages: [
+        'My dog said....',
+         'Jeff has aassda',
+         'Heeeelllooooo?'
+       ],
+      usersInRoom: [
+       'Ben',
+       'Will',
+       'Steve',
+       'Jacob'
+     ]
     };
   }
 
@@ -86,15 +93,19 @@ const styles = theme => ({
   render = () => {
     const { classes } = this.props;
 
-    const messages = (
-      /*Message history from api*/.map((message) => {
-      <Message
-        messageSender={message.sender}
-        messageTime={message.time}
-        messageContent={message.content}
-      />
-    });
+    const users = (
+      this.state.usersInRoom.map(user =>
+        (
+          <Typography
+            variant="display2"
+            gutterbottom
+            className={classes.list}
+          >
+            {user}
+          </Typography>
+      )
     )
+  );
 
 
     return (
@@ -109,46 +120,15 @@ const styles = theme => ({
         </AppBar>
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          {messages}
+
         </main>
         <Drawer
           variant="permanent"
           anchor="right"
           className={classes.drawerPaper}
         >
-          <div className={classes.toolbar} />
           <List>
-            <Typography
-              variant="display2"
-              gutterbottom
-              className={classes.list}
-            >
-            User1
-            </Typography>
-            <Divider />
-            <Typography
-              variant="display2"
-              gutterbottom
-              className={classes.list}
-            >
-            User2
-            </Typography>
-            <Divider />
-            <Typography
-              variant="display2"
-              className={classes.list}
-              gutterbottom
-            >
-            User3
-            </Typography>
-            <Divider />
-            <Typography
-              variant="display2"
-              gutterbottom
-              className={classes.list}
-            >
-            User4
-            </Typography>
+            {users}
           </List>
         </Drawer>
         <div className={classes.toolbar} />
@@ -159,6 +139,6 @@ const styles = theme => ({
 }
 
 Dashboard.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
 export default withStyles(styles)(Dashboard);
