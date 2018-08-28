@@ -68,7 +68,7 @@ const styles = theme => ({
         username: '',
         password: ''
       },
-      messages: [
+      messageHistory: [
         'My dog said....',
          'Jeff has aassda',
          'Heeeelllooooo?'
@@ -78,20 +78,43 @@ const styles = theme => ({
        'Will',
        'Steve',
        'Jacob'
-     ]
+     ],
+     currentMessage: ''
     };
+  }
+
+  onSubmit = (e) => {
+    e.preventDefault();
+    // const messageHistory = this.state.messageHistory.concat([this.state.currentMessage]);
+    this.setState(prevState => ({
+      messageHistory: [...prevState.messageHistory, this.state.currentMessage],
+      currentMessage: ''
+    }));
+
+    // Probably a way to do this in one "setState"
+    // this.setState(this.state.currentMessage: '');
+
   }
 
   handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value
     });
-    console.log(this.state);
   }
 
 
   render = () => {
+    console.log(this.state);
+
     const { classes } = this.props;
+
+    const messages = (
+      this.state.messageHistory.map(message => (
+        <Message
+          messageContent={message}
+        />
+      ))
+    );
 
     const users = (
       this.state.usersInRoom.map(user =>
@@ -100,8 +123,10 @@ const styles = theme => ({
             variant="display2"
             gutterbottom
             className={classes.list}
+            key={user}
           >
             {user}
+            <Divider />
           </Typography>
       )
     )
@@ -120,7 +145,7 @@ const styles = theme => ({
         </AppBar>
         <main className={classes.content}>
           <div className={classes.toolbar} />
-
+          {messages}
         </main>
         <Drawer
           variant="permanent"
@@ -132,7 +157,7 @@ const styles = theme => ({
           </List>
         </Drawer>
         <div className={classes.toolbar} />
-        <Input handleChange={this.handleChange} />
+        <Input value={this.state.currentMessage} onSubmit={this.onSubmit} handleChange={this.handleChange} />
       </div>
     );
   }

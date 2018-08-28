@@ -30,20 +30,21 @@ const styles = {
 
 const Input = (props) => {
   const { classes } = props;
-
+  console.log(props.value);
   return (
     <form
       autoComplete="off"
       className={classes.messageForm}
+      onSubmit={props.onSubmit}
     >
       <TextField
         id="message"
         label="message"
-        name="mesage"
+        name="currentMessage"
         onChange={props.handleChange}
+        value={props.value}
         fullWidth
         className={classes.message}
-
       />
       <Button
         type="submit"
