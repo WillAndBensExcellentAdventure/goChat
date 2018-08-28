@@ -21,8 +21,8 @@ const styles = {
   messageForm: {
     bottom: 0,
     width: 'calc(100% - 240px)',
-    position: 'absolute',
-    padding: '3%',
+    position: 'fixed',
+    padding: '1%',
     backgroundColor: 'rgba(0, 0, 0, 0.3)',
   }
 };

@@ -55,6 +55,8 @@ const styles = theme => ({
     width: `calc(100vw - ${drawerWidth}px)`,
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing.unit * 3,
+    overflowY: 'scroll',
+    marginBottom: '5%'
   },
 });
 
@@ -64,14 +66,24 @@ const styles = theme => ({
 
     this.state = {
       chatRoom: '',
-      user: {
-        username: '',
-        password: ''
-      },
+      username: 'William',
       messageHistory: [
-        'My dog said....',
-         'Jeff has aassda',
-         'Heeeelllooooo?'
+        {
+          messageSender: 'Ben',
+          messageTime: '12:45pm',
+          messageContent: 'Hello world'
+        },
+        {
+          messageSender: 'Will',
+          messageTime: '12:25pm',
+          messageContent: 'The world cannot hear you'
+        },
+        {
+          messageSender: 'Steve',
+          messageTime: '12:43pm',
+          messageContent: 'Where am I?'
+        },
+
        ],
       usersInRoom: [
        'Ben',
@@ -83,17 +95,20 @@ const styles = theme => ({
     };
   }
 
+
   onSubmit = (e) => {
     e.preventDefault();
-    // const messageHistory = this.state.messageHistory.concat([this.state.currentMessage]);
+
+    const message = {
+      messageSender: this.state.username,
+      messageTime: '2', // I know this wont work by itself
+      messageContent: this.state.currentMessage
+    }
+
     this.setState(prevState => ({
-      messageHistory: [...prevState.messageHistory, this.state.currentMessage],
+      messageHistory: [...prevState.messageHistory, message],
       currentMessage: ''
     }));
-
-    // Probably a way to do this in one "setState"
-    // this.setState(this.state.currentMessage: '');
-
   }
 
   handleChange = (e) => {
@@ -109,9 +124,11 @@ const styles = theme => ({
     const { classes } = this.props;
 
     const messages = (
-      this.state.messageHistory.map(message => (
+      this.state.messageHistory.map(m => (
         <Message
-          messageContent={message}
+          messageContent={m.messageContent}
+          messageTime={m.messageTime}
+          messageSender={m.messageSender}
         />
       ))
     );
